@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 
-import barBorder from "../assets/images/border.png";
-import pattern from "../assets/images/pattern.png";
-import crest from "../assets/images/crest.png";
+import barBorder from "../assets/images/border.webp";
+import pattern from "../assets/images/pattern.webp";
+import crest from "../assets/images/crest.webp";
 
 const barBorderUrl = `url(${barBorder.src})`;
 const patternUrl = `url(${pattern.src})`;
@@ -21,13 +21,7 @@ const navItems = [
 <div class="navbar">
     <div class="navbar-decoration">
         <a href="/" class="crest-img">
-            <Image
-                src={crest}
-                alt="A Family Crest"
-                layout="constrained"
-                width={180}
-                height={180}
-            />
+            <Image src={crest} alt="A Family Crest" width={200} height={200} />
         </a>
         <nav class="navbar-items">
             <ul>
@@ -65,10 +59,10 @@ const navItems = [
         inset: 0;
         background: var(--main-gradient-bg);
 
-        border-image: var(--barBorderUrl) 153 139 154 139 fill / 153px 139px
-            154px 139px;
+        border-image: var(--barBorderUrl) 306 280 313 280 fill / 306px 280px
+            313px 280px;
         border-image-repeat: repeat;
-        border-image-width: 40px;
+        border-image-width: 60px;
         border-image-outset: 6px;
         border-spacing: 80px;
     }
@@ -87,7 +81,7 @@ const navItems = [
     }
 
     .crest-img {
-        margin: 0 80px;
+        margin: 0 8rem;
     }
 
     .navbar-items {
