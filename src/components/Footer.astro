@@ -1,0 +1,61 @@
+---
+import pattern from "../assets/images/pattern.png";
+
+const patternUrl = `url(${pattern.src})`;
+
+const { commitId = "asdmkuI" } = Astro.props;
+---
+
+<footer class="footer">
+    <div class="footer-pattern"></div>
+    <div class="footer-content">
+        <p class="footer-seal">&copy; The Scribe, {new Date().getFullYear()}</p>
+        <p class="footer-mark">
+            Sealed by the Hand of Fate: <a href="/">{commitId}</a>
+        </p>
+    </div>
+</footer>
+
+<style define:vars={{ patternUrl }}>
+    .footer {
+        position: relative;
+        text-align: center;
+        padding: 60px 0;
+        margin-top: 160px;
+        overflow: hidden;
+        background: var(--main-gradient-bg);
+    }
+
+    .footer::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+
+        background: var(--patternUrl);
+        opacity: 0.05;
+        background-position: top;
+        background-size: 200px;
+    }
+
+    .footer-content {
+        margin: 0 auto;
+    }
+
+    .footer-seal {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+
+    .footer-mark {
+        font-size: 0.9em;
+        margin-top: 0;
+    }
+
+    .footer-mark a {
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: #fff;
+    }
+</style>

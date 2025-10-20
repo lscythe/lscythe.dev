@@ -1,0 +1,27 @@
+:root {
+    --main-gradient-bg: linear-gradient(
+        to left,
+        #27090c 20%,
+        #560b0d 50%,
+        #27090c 80%
+    );
+}
+
+h1,
+h2,
+h3 {
+    font-family: "UnifrakturCook", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 48px;
+    color: #fff;
+}
+
+body,
+footer {
+    font-family: "Cormorant Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    color: #fff;
+}

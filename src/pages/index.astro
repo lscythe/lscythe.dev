@@ -1,11 +1,144 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { Image } from "astro:assets";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import MainLayout from "../layouts/MainLayout.astro";
+import NavBar from "../components/NavBar.astro";
+import Separator from "../components/Separator.astro";
+
+import topSectionBg from "../assets/images/top-section-bg.png";
+import frame from "../assets/images/frame.png";
+import parchment from "../assets/images/parchment.jpg";
+
+const {
+    name = "Rendra Prasetia",
+    job = "Mobile Developer",
+    overview = `
+  Innovative and results-driven Mobile Software Engineer with over 4 years of experience developing
+  Android and cross-platform mobile applications. Skilled in Kotlin, Java and Flutter, with hands-on
+  expertise in refactoring legacy systems, integrating third-party APIs, and implementing scalable
+  architectures. Passionate about improving maintainability and delivering high-quality, user-centric
+  mobile experiences through clean architecture and modern development practices.
+  `,
+} = Astro.props;
+
+const topSectionBgUrl = `url(${topSectionBg.src})`;
+const parchmentUrl = `url(${parchment.src})`;
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout>
+    <div class="top-section">
+        <NavBar />
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-image">
+                    <Image
+                        src={frame}
+                        alt="Portrait Frame"
+                        layout="constrained"
+                        width={420}
+                        height={420}
+                    />
+                </div>
+                <div class="hero-text">
+                    <h1>{name}</h1>
+                    <h2>{job}</h2>
+                    <p>{overview}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <Separator />
+</MainLayout>
+
+<style define:vars={{ topSectionBgUrl, parchmentUrl }}>
+    .top-section {
+        position: relative;
+        min-height: 840px;
+
+        background: var(--topSectionBgUrl) center/cover no-repeat;
+    }
+
+    .top-section::before,
+    .top-section::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .top-section::before {
+        background: var(--parchmentUrl);
+        opacity: 0.5;
+    }
+
+    .top-section::after {
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0.3) 40%,
+                rgba(0, 0, 0, 0.8) 90%,
+                rgba(0, 0, 0, 1) 100%
+            ),
+            rgba(51, 0, 1, 0.7);
+    }
+
+    .top-section > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6rem 14rem;
+    }
+
+    .hero-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        max-width: 1280px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+    }
+
+    .hero-image {
+        width: 420px;
+        height: auto;
+        display: block;
+    }
+
+    .hero-text {
+        flex: 1;
+        text-align: left;
+        max-width: 800px;
+    }
+
+    .hero-text h1 {
+        font-size: 3.4rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .hero-text p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+    }
+
+    .hero-text h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        margin-top: 0;
+    }
+    .job {
+        margin: 0;
+        font-size: 40px;
+    }
+    .overview {
+        font-size: 24px;
+    }
+</style>

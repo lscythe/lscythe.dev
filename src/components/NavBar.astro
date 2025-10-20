@@ -1,0 +1,116 @@
+---
+import { Image } from "astro:assets";
+
+import barBorder from "../assets/images/border.png";
+import pattern from "../assets/images/pattern.png";
+import crest from "../assets/images/crest.png";
+
+const barBorderUrl = `url(${barBorder.src})`;
+const patternUrl = `url(${pattern.src})`;
+
+const current = Astro.url.pathname;
+const navItems = [
+    { title: "The Memoir", link: "#about" },
+    { title: "The Gallery", link: "#projects" },
+    { title: "The Codex", link: "#blogs" },
+    { title: "The Registry", link: "#contact" },
+    { title: "The Ledger", link: "/resume.pdf" },
+];
+---
+
+<div class="navbar">
+    <div class="navbar-decoration">
+        <a href="/" class="crest-img">
+            <Image
+                src={crest}
+                alt="A Family Crest"
+                layout="constrained"
+                width={180}
+                height={180}
+            />
+        </a>
+        <nav class="navbar-items">
+            <ul>
+                {
+                    navItems.map((item) => (
+                        <li>
+                            <a href={item.link}>{item.title}</a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<style define:vars={{ barBorderUrl, patternUrl }}>
+    :root {
+        --navbar-height: 70px;
+    }
+
+    .navbar {
+        position: relative;
+        width: auto;
+        padding: 80px 60px 0;
+    }
+
+    .navbar-decoration {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1;
+        max-height: 100px;
+
+        inset: 0;
+        background: var(--main-gradient-bg);
+
+        border-image: var(--barBorderUrl) 153 139 154 139 fill / 153px 139px
+            154px 139px;
+        border-image-repeat: repeat;
+        border-image-width: 40px;
+        border-image-outset: 6px;
+        border-spacing: 80px;
+    }
+
+    .navbar-decoration::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+
+        background-image: var(--patternUrl);
+        opacity: 0.06;
+        background-position: center;
+        background-size: 120px;
+    }
+
+    .crest-img {
+        margin: 0 80px;
+    }
+
+    .navbar-items {
+        position: relative;
+        padding-right: 42px;
+    }
+
+    .navbar-items ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar-items li {
+        float: left;
+    }
+
+    .navbar-items a {
+        padding: 28px;
+        text-decoration: none;
+        font-family: "MedievalSharp", cursive;
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: #fff;
+    }
+</style>
