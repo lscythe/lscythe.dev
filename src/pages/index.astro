@@ -4,16 +4,21 @@ import { Image } from "astro:assets";
 import MainLayout from "../layouts/MainLayout.astro";
 import NavBar from "../components/NavBar.astro";
 import Separator from "../components/Separator.astro";
+import Title from "../components/Title.astro";
 
 import topSectionBg from "../assets/images/top-section-bg.webp";
 import frame from "../assets/images/frame.webp";
 import parchment from "../assets/images/parchment.webp";
+import portrait from "../assets/images/portrait.webp";
+
+const currentYear = new Date().getFullYear();
+const expYears = currentYear - 2020;
 
 const {
     name = "Rendra Prasetia",
-    job = "Mobile Developer",
+    job = "Android Developer",
     overview = `
-  Innovative and results-driven Mobile Software Engineer with over 4 years of experience developing
+  Innovative and results-driven <strong>Android Developer</strong> with over <strong>${expYears} years</strong> of experience developing
   Android and cross-platform mobile applications. Skilled in Kotlin, Java and Flutter, with hands-on
   expertise in refactoring legacy systems, integrating third-party APIs, and implementing scalable
   architectures. Passionate about improving maintainability and delivering high-quality, user-centric
@@ -23,34 +28,41 @@ const {
 
 const topSectionBgUrl = `url(${topSectionBg.src})`;
 const parchmentUrl = `url(${parchment.src})`;
+const portraitUrl = `url(${portrait.src})`;
 ---
 
 <MainLayout>
     <div class="top-section">
         <NavBar />
-        <section class="hero">
-            <div class="hero-container">
-                <div class="hero-image">
-                    <Image
-                        src={frame}
-                        alt="Portrait Frame"
-                        layout="constrained"
-                        width={420}
-                        height={420}
-                    />
-                </div>
-                <div class="hero-text">
-                    <h1>{name}</h1>
-                    <h2>{job}</h2>
-                    <p>{overview}</p>
+        <section class="section">
+            <div class="hero">
+                <div class="hero-container">
+                    <div class="hero-image">
+                        <div class="portrait-wrapper">
+                            <Image
+                                src={portrait}
+                                alt="Portrait"
+                                class="portrait"
+                            />
+                        </div>
+                        <Image src={frame} alt="Portrait Frame" class="frame" />
+                    </div>
+                    <div class="hero-text">
+                        <h1>{name}</h1>
+                        <h2>{job}</h2>
+                        <p set:html={overview} />
+                    </div>
                 </div>
             </div>
         </section>
     </div>
     <Separator />
+    <section class="section">
+        <Title title="The Gallery" />
+    </section>
 </MainLayout>
 
-<style define:vars={{ topSectionBgUrl, parchmentUrl }}>
+<style define:vars={{ topSectionBgUrl, parchmentUrl, portraitUrl }}>
     .top-section {
         position: relative;
         min-height: 840px;
@@ -89,11 +101,15 @@ const parchmentUrl = `url(${parchment.src})`;
         z-index: 1;
     }
 
-    .hero {
+    .section {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 6rem 14rem;
+        padding: 4rem 14rem;
+    }
+
+    .hero {
+        padding: 2rem 0;
     }
 
     .hero-container {
@@ -107,9 +123,38 @@ const parchmentUrl = `url(${parchment.src})`;
     }
 
     .hero-image {
-        width: 420px;
-        height: auto;
-        display: block;
+        position: relative;
+        width: 460px;
+        aspect-ratio: 1/1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .portrait-wrapper {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        inset: 0;
+        z-index: 0;
+    }
+
+    .portrait {
+        width: 60%;
+        height: 60%;
+        object-fit: cover;
+        z-index: 0;
+    }
+
+    .frame {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        z-index: 1;
+        pointer-events: none;
     }
 
     .hero-text {
@@ -123,22 +168,15 @@ const parchmentUrl = `url(${parchment.src})`;
         margin-bottom: 0.25rem;
     }
 
-    .hero-text p {
-        line-height: 1.6;
-        margin-bottom: 1rem;
-        font-size: 1.4rem;
-    }
-
     .hero-text h2 {
         font-size: 2rem;
         margin-bottom: 1.5rem;
         margin-top: 0;
     }
-    .job {
-        margin: 0;
-        font-size: 40px;
-    }
-    .overview {
-        font-size: 24px;
+
+    .hero-text p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
     }
 </style>
