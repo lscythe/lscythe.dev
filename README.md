@@ -1,4 +1,4 @@
-# Personal Website
+# (WIP) Personal Website
 
 This is my personal website built with [Astro](https://astro.build).
 It features a medieval-inspired design and serves as a personal space to showcase projects, write articles, and experiment.
