@@ -1,17 +1,26 @@
 ---
 import pattern from "../assets/images/pattern.webp";
+import { hash } from "../utils/git-commit";
 
 const patternUrl = `url(${pattern.src})`;
 
-const { commitId = "asdmkuI" } = Astro.props;
+const commitUrl = `${import.meta.env.REPO_URL}/commit/${hash}`;
+const licenseUrl = `${import.meta.env.REPO_URL}/blob/main/LICENSE`;
 ---
 
 <footer class="footer">
     <div class="footer-pattern"></div>
     <div class="footer-content">
-        <p class="footer-seal">&copy; The Scribe, {new Date().getFullYear()}</p>
+        <p class="footer-seal">
+            &copy; <a href={licenseUrl}>The Scribe</a>
+            {new Date().getFullYear()}
+        </p>
         <p class="footer-mark">
-            Sealed by the Hand of Fate: <a href="/">{commitId}</a>
+            Sealed by the Hand of Fate: <a
+                href={commitUrl}
+                target="_blank"
+                rel="noopener">{hash}</a
+            >
         </p>
     </div>
 </footer>
@@ -45,6 +54,12 @@ const { commitId = "asdmkuI" } = Astro.props;
     .footer-seal {
         font-size: 2em;
         margin-bottom: 0.6rem;
+    }
+
+    .footer-seal a {
+        font-weight: bold;
+        color: #fff;
+        text-decoration: none;
     }
 
     .footer-mark {
