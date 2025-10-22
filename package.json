@@ -6,15 +6,17 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "cf-preview": "wrangler dev --log-level=none"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.10",
+    "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.6.0",
     "astro": "^5.14.6",
     "sass": "^1.93.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.6",
     "wrangler": "^4.43.0"
   }
 }
