@@ -35,7 +35,7 @@ const borderUrl = `url(${border.src})`;
         margin: 0;
         padding: 0;
         width: 100%;
-        min-height: 100%;
+        height: 100%;
         overscroll-behavior: contain;
     }
 
@@ -47,6 +47,7 @@ const borderUrl = `url(${border.src})`;
     .body-container {
         max-width: 1920px;
         margin: 0 auto;
+        height: 100vh;
 
         border-image: var(--borderUrl) 129 125 132 120 fill / 129px 125px 132px
             120px;

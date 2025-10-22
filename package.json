@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.10",
+    "@astrojs/sitemap": "^3.6.0",
     "astro": "^5.14.6",
     "sass": "^1.93.2"
   },

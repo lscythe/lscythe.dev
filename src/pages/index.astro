@@ -18,20 +18,13 @@ import pattern from "../assets/images/pattern.webp";
 const currentYear = new Date().getFullYear();
 const expYears = currentYear - 2020;
 
-const {
-    name = "Rendra Prasetia",
-    job = "Android Developer",
-    email = "rendrati15c@gmail.com",
-    github = "lscythe",
-    telegram = "Porororo69",
-    linkedin = "lscythe",
-} = Astro.props;
+const { name = "Rendra Prasetia", job = "Android Developer" } = Astro.props;
 
 const cta = [
-    { label: "Send a Missive", link: `mailto:${email}` },
-    { label: "Github", link: `https://github.com/${github}` },
-    { label: "LinkedIn", link: `https://www.linkedin.com/in/${linkedin}` },
-    { label: "Telegram", link: `https://t.me/${telegram}` },
+    { label: "Send a Missive", link: `mailto:rendrati15c@gmail.com` },
+    { label: "Github", link: `https://github.com/lscythe` },
+    { label: "LinkedIn", link: `https://www.linkedin.com/in/lscythe` },
+    { label: "Telegram", link: `https://t.me/Porororo69` },
 ];
 
 const topSectionBgUrl = `url(${topSectionBg.src})`;
