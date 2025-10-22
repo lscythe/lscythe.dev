@@ -1,10 +1,11 @@
 ---
 import background from "../assets/images/root-bg.webp";
-import border from "../assets/images/border.webp";
+import border from "../assets/images/bg-border.webp";
+
 import Head from "../components/Head.astro";
 import Footer from "../components/Footer.astro";
 
-const { ...props } = Astro.props;
+const { showFooter = true, ...props } = Astro.props;
 
 const backgroundUrl = `url(${background.src})`;
 const borderUrl = `url(${border.src})`;
@@ -19,8 +20,8 @@ const borderUrl = `url(${border.src})`;
     <body>
         <div class="body-container">
             <slot />
+            {showFooter && <Footer />}
         </div>
-        <Footer />
     </body>
 </html>
 
@@ -35,23 +36,22 @@ const borderUrl = `url(${border.src})`;
         padding: 0;
         width: 100%;
         min-height: 100%;
-        overflow-x: hidden;
         overscroll-behavior: contain;
     }
 
     body {
         background:
-            linear-gradient(
-                to bottom,
-                rgba(61, 20, 0, 0.35) 0%,
-                rgba(61, 20, 0, 0.85) 100%
-            ),
-            var(--backgroundUrl);
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.6)), var(--backgroundUrl);
     }
 
     .body-container {
         max-width: 1920px;
         margin: 0 auto;
-        height: 100%;
+
+        border-image: var(--borderUrl) 129 125 132 120 fill / 129px 125px 132px
+            120px;
+        border-image-outset: 7.4rem;
+        border-image-repeat: repeat;
+        border-image-width: 0 12rem;
     }
 </style>

@@ -5,11 +5,15 @@ import MainLayout from "../layouts/MainLayout.astro";
 import NavBar from "../components/NavBar.astro";
 import Separator from "../components/Separator.astro";
 import Title from "../components/Title.astro";
+import Project from "../components/Project.astro";
+import Button from "../components/Button.astro";
 
 import topSectionBg from "../assets/images/top-section-bg.webp";
 import frame from "../assets/images/frame.webp";
 import parchment from "../assets/images/parchment.webp";
 import portrait from "../assets/images/portrait.webp";
+import workshop from "../assets/images/workshop.webp";
+import pattern from "../assets/images/pattern.webp";
 
 const currentYear = new Date().getFullYear();
 const expYears = currentYear - 2020;
@@ -17,61 +21,106 @@ const expYears = currentYear - 2020;
 const {
     name = "Rendra Prasetia",
     job = "Android Developer",
-    overview = `
-  Innovative and results-driven <strong>Android Developer</strong> with over <strong>${expYears} years</strong> of experience developing
-  Android and cross-platform mobile applications. Skilled in Kotlin, Java and Flutter, with hands-on
-  expertise in refactoring legacy systems, integrating third-party APIs, and implementing scalable
-  architectures. Passionate about improving maintainability and delivering high-quality, user-centric
-  mobile experiences through clean architecture and modern development practices.
-  `,
+    email = "rendrati15c@gmail.com",
+    github = "lscythe",
+    telegram = "Porororo69",
+    linkedin = "lscythe",
 } = Astro.props;
+
+const cta = [
+    { label: "Send a Missive", link: `mailto:${email}` },
+    { label: "Github", link: `https://github.com/${github}` },
+    { label: "LinkedIn", link: `https://www.linkedin.com/in/${linkedin}` },
+    { label: "Telegram", link: `https://t.me/${telegram}` },
+];
 
 const topSectionBgUrl = `url(${topSectionBg.src})`;
 const parchmentUrl = `url(${parchment.src})`;
 const portraitUrl = `url(${portrait.src})`;
+const workshopUrl = `url(${workshop.src})`;
+const patternUrl = `url(${pattern.src})`;
 ---
 
 <MainLayout>
-    <div class="top-section">
-        <NavBar />
-        <section class="section">
-            <div class="hero">
-                <div class="hero-container">
-                    <div class="hero-image">
-                        <div class="portrait-wrapper">
-                            <Image
-                                src={portrait}
-                                alt="Portrait"
-                                class="portrait"
-                            />
-                        </div>
-                        <Image src={frame} alt="Portrait Frame" class="frame" />
+    <NavBar />
+    <section class="about-section" id="about">
+        <div class="hero">
+            <div class="hero-container">
+                <div class="hero-image">
+                    <div class="portrait-wrapper">
+                        <Image src={portrait} alt="Portrait" class="portrait" />
                     </div>
-                    <div class="hero-text">
-                        <h1>{name}</h1>
-                        <h2>{job}</h2>
-                        <p set:html={overview} />
-                    </div>
+                    <Image src={frame} alt="Portrait Frame" class="frame" />
+                </div>
+                <div class="hero-text">
+                    <h1>{name}</h1>
+                    <h2>{job}</h2>
+                    <p>
+                        Hail, seekers of innovation! I am a devoted
+                        <strong>Android Developer</strong>, wielding over
+                        <strong>{expYears} years</strong> of experience to forge
+                        Android and cross-platform apps that captivate the realm.
+                        Master of Kotlin, Java, and Flutter, I take pride in transforming
+                        tangled legacy code into mighty, scalable systems and weaving
+                        third-party APIs into seamless tapestries. Guided by the
+                        art of clean architecture and a zeal for modern dev practices,
+                        I craft mobile experiences as enchanting to wield as they
+                        are steadfast beneath the surface.
+                    </p>
                 </div>
             </div>
-        </section>
-    </div>
-    <Separator />
-    <section class="section">
-        <Title title="The Gallery" />
+        </div>
     </section>
+    <!-- <Separator /> -->
+    <section class="project-section" id="projects">
+        <div class="project">
+            <Title title="The Gallery" />
+        </div>
+    </section>
+    <!-- <Separator /> -->
+    <section class="contact-section" id="contact">
+        <div class="contact-content">
+            <h2>The Registry</h2>
+            <p>
+                Hark, noble visitor! Have a grand vision for an app or a quest
+                to enhance an existing one? I’m eager to forge mobile
+                experiences that shine like polished armor. Let us craft
+                something legendary together!
+            </p>
+            <ul class="contact-cta">
+                {
+                    cta.map((item) => (
+                        <li>
+                            <Button label={item.label} link={item.link} />
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
+    <Separator />
 </MainLayout>
 
-<style define:vars={{ topSectionBgUrl, parchmentUrl, portraitUrl }}>
-    .top-section {
+<style
+    define:vars={{
+        topSectionBgUrl,
+        parchmentUrl,
+        portraitUrl,
+        workshopUrl,
+        patternUrl,
+    }}
+>
+    .about-section {
         position: relative;
-        min-height: 840px;
+        min-height: 20rem;
+        margin-top: -10rem;
+        padding: 12.8rem 0;
 
         background: var(--topSectionBgUrl) center/cover no-repeat;
     }
 
-    .top-section::before,
-    .top-section::after {
+    .about-section::before,
+    .about-section::after {
         content: "";
         position: absolute;
         inset: 0;
@@ -79,12 +128,12 @@ const portraitUrl = `url(${portrait.src})`;
         pointer-events: none;
     }
 
-    .top-section::before {
+    .about-section::before {
         background: var(--parchmentUrl);
         opacity: 0.5;
     }
 
-    .top-section::after {
+    .about-section::after {
         background:
             linear-gradient(
                 to bottom,
@@ -96,20 +145,13 @@ const portraitUrl = `url(${portrait.src})`;
             rgba(51, 0, 1, 0.7);
     }
 
-    .top-section > * {
+    .about-section > * {
         position: relative;
         z-index: 1;
     }
 
-    .section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 4rem 14rem;
-    }
-
     .hero {
-        padding: 2rem 0;
+        padding: 5rem 0;
     }
 
     .hero-container {
@@ -124,7 +166,7 @@ const portraitUrl = `url(${portrait.src})`;
 
     .hero-image {
         position: relative;
-        width: 460px;
+        width: 32rem;
         aspect-ratio: 1/1;
         display: flex;
         justify-content: center;
@@ -160,7 +202,7 @@ const portraitUrl = `url(${portrait.src})`;
     .hero-text {
         flex: 1;
         text-align: left;
-        max-width: 800px;
+        max-width: 560rem;
     }
 
     .hero-text h1 {
@@ -178,5 +220,104 @@ const portraitUrl = `url(${portrait.src})`;
         line-height: 1.6;
         margin-bottom: 1rem;
         font-size: 1.4rem;
+    }
+
+    .project-section {
+        position: relative;
+
+        background: var(--workshopUrl) center/cover no-repeat;
+    }
+
+    .project-section::before,
+    .project-section::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .project-section::before {
+        background: var(--parchmentUrl);
+        background-position: center;
+        opacity: 0.5;
+    }
+
+    .project-section::after {
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.15) 40%,
+                rgba(0, 0, 0, 0.85) 90%,
+                rgba(0, 0, 0, 1) 100%
+            ),
+            rgba(51, 0, 1, 0.7);
+    }
+
+    .project-section > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .project {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        padding: 12.8rem;
+    }
+
+    .contact-section {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.15) 40%,
+                rgba(0, 0, 0, 0.85) 90%,
+                rgba(0, 0, 0, 1) 100%
+            ),
+            var(--main-gradient-bg);
+    }
+
+    .contact-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+
+        background-image: var(--patternUrl);
+        opacity: 0.044;
+        background-position: center;
+        background-size: 20%;
+    }
+
+    .contact-content {
+        padding: 8rem 8rem;
+        margin: 0 18rem;
+    }
+
+    .contact-content h2 {
+        margin: 0;
+    }
+
+    .contact-content p {
+        line-height: 1.6;
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+    }
+
+    .contact-cta {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        gap: 2rem;
     }
 </style>

@@ -1,0 +1,30 @@
+---
+import btnBorder from "../assets/images/btn-border.webp";
+
+const { label, link } = Astro.props;
+
+const btnBorderUrl = `url(${btnBorder.src})`;
+---
+
+<a class="button" href={link} target="_blank" rel="noopener">
+    <p>{label}</p>
+</a>
+
+<style define:vars={{ btnBorderUrl }}>
+    .button {
+        color: white;
+        display: inline-block;
+        padding: 1rem 2.4rem;
+        text-decoration: none;
+        background: var(--main-gradient-bg);
+        border-image: var(--btnBorderUrl) 26 26 26 26 fill / 26px 26px 26px 26px;
+        border-image-outset: 0.5rem;
+    }
+
+    .button p {
+        font-family: "MedievalSharp", cursive;
+        font-weight: bold;
+        font-size: 1.4rem;
+        margin: 0;
+    }
+</style>

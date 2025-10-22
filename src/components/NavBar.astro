@@ -12,7 +12,6 @@ const current = Astro.url.pathname;
 const navItems = [
     { title: "The Memoir", link: "#about" },
     { title: "The Gallery", link: "#projects" },
-    { title: "The Codex", link: "#blogs" },
     { title: "The Registry", link: "#contact" },
     { title: "The Ledger", link: "/resume.pdf" },
 ];
@@ -20,8 +19,8 @@ const navItems = [
 
 <div class="navbar">
     <div class="navbar-decoration">
-        <a href="/" class="crest-img">
-            <Image src={crest} alt="A Family Crest" width={200} height={200} />
+        <a href="/">
+            <Image src={crest} alt="A Family Crest" class="crest-img" />
         </a>
         <nav class="navbar-items">
             <ul>
@@ -38,14 +37,11 @@ const navItems = [
 </div>
 
 <style define:vars={{ barBorderUrl, patternUrl }}>
-    :root {
-        --navbar-height: 70px;
-    }
-
     .navbar {
-        position: relative;
-        width: auto;
-        padding: 80px 60px 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        padding: 4rem 8rem 0;
     }
 
     .navbar-decoration {
@@ -54,7 +50,7 @@ const navItems = [
         justify-content: space-between;
         align-items: center;
         z-index: 1;
-        max-height: 100px;
+        max-height: 6rem;
 
         inset: 0;
         background: var(--main-gradient-bg);
@@ -62,9 +58,8 @@ const navItems = [
         border-image: var(--barBorderUrl) 306 280 313 280 fill / 306px 280px
             313px 280px;
         border-image-repeat: repeat;
-        border-image-width: 60px;
-        border-image-outset: 6px;
-        border-spacing: 80px;
+        border-image-width: 8rem;
+        border-image-outset: 1rem;
     }
 
     .navbar-decoration::before {
@@ -77,34 +72,33 @@ const navItems = [
         background-image: var(--patternUrl);
         opacity: 0.06;
         background-position: center;
-        background-size: 120px;
+        background-size: 40%;
     }
 
     .crest-img {
+        width: 11rem;
+        height: auto;
         margin: 0 8rem;
     }
 
     .navbar-items {
         position: relative;
-        padding-right: 42px;
+        padding-right: 2rem;
     }
 
     .navbar-items ul {
-        list-style-type: none;
+        list-style: none;
         margin: 0;
         padding: 0;
-    }
-
-    .navbar-items li {
-        float: left;
+        display: flex;
+        gap: 3rem;
     }
 
     .navbar-items a {
-        padding: 28px;
         text-decoration: none;
         font-family: "MedievalSharp", cursive;
         font-weight: bold;
-        font-size: 1.4rem;
+        font-size: 1.4em;
         color: #fff;
     }
 </style>
